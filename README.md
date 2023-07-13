@@ -32,10 +32,11 @@
 1. 업데이트 파일 ***git add, commit, push*** 순서
 2. 새 폴더에 클론 생성시 하위폴더로 생성되니 디렉토리 확인 필수
     - cd git폴더명 : 디렉토리 변경
-3. git 확인 코드
+3. git 코드
     - git remote -v : 원격저장소 확인
     - git status : 커밋 자료 확인
     - git log : 커밋 이력 확인
+    - git remote rm 깃명
 ---
 # :+1: *마크다운 문법*
 
