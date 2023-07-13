@@ -1,10 +1,10 @@
-# *git 사용법*
+# :purple_heart: *git 사용법*
 
 **로컬 저장소**
 1. 로컬 저장소로 지정할 폴더 생성
 2. git init 로컬 저장소 지정
-    1. touch 파일 생성(.확장자)
-    2. mkdir 폴더 생성
+    - touch 파일 생성(.확장자)
+    - mkdir 폴더 생성
 3. git add "파일 및 폴더명 or .(전체)"
 4. git commit -m "커밋 명"
 
@@ -24,7 +24,7 @@
 **push에서 제외할 자료**
 1. .gitignore 파일 생성
 2. 제외할 파일명 입력
-    1. 이미 커밋한 파일 제외불가
+    - 이미 커밋한 파일 제외불가
 - gitignore 설정 서비스
 [gitignore](https://www.toptal.com/developers/gitignore)
 
@@ -32,9 +32,9 @@
 1. 업데이트 파일 ***git add, commit, push*** 순서
 2. 새 폴더에 클론 생성시 하위폴더 생성되니 ***cd git폴더명***으로 변경 필수
 3. git 확인 코드
-    1. git remote -v : 원격저장소 확인
-    2. git status : 커밋 자료 확인
-    3. git log : 커밋 이력 확인
+    - git remote -v : 원격저장소 확인
+    - git status : 커밋 자료 확인
+    - git log : 커밋 이력 확인
 ---
 # *마크다운 문법*
 
