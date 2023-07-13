@@ -1,10 +1,14 @@
 # :purple_heart: *git 사용법*
 
+**:heavy_check_mark: git 관리영역**
+###### Working Directory -> Staging Area -> Repositoty
+---
 **로컬 저장소**
 1. 로컬 저장소로 지정할 폴더 생성
 2. git init 로컬 저장소 지정
     - touch 파일 생성(.확장자)
     - mkdir 폴더 생성
+    - git 관리폴더 내 중복 git 설정:x:
 3. git add "파일 및 폴더명 or .(전체)"
 4. git commit -m "커밋 명"
 
