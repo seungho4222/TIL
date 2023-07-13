@@ -36,7 +36,7 @@
     - git remote -v : 원격저장소 확인
     - git status : 커밋 자료 확인
     - git log : 커밋 이력 확인
-    - git remote rm 깃명
+    - git remote rm 깃명 : 원격저장소 삭제
 ---
 # :+1: *마크다운 문법*
 
