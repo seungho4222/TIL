@@ -2,8 +2,19 @@ import json
 
 
 def sorted_cs_books_by_price(books, categories):
-    # 여기에 코드를 작성합니다.  
-    pass
+    category_computer = []
+    for book in books:
+        new_dict = {}       # 새로운 딕셔너리 생성 후 필요한 정보만 추출
+
+        for cate_id in book['categoryId']:
+            if cate_id == 2721:     # 카테고리 컴퓨터공학만 추출
+                new_dict['판매가격'] = int(book['priceSales'])
+                new_dict['title'] = book['title']
+                category_computer.append(new_dict)
+    
+    sorted(category_computer, key=lambda x:x['판매가격'], reverse=True)     # 판매가격순 정렬
+
+    return [c_computer['title'] for c_computer in category_computer]        # 딕셔너리 내 타이틀만 추출
 
 
 # 아래의 코드는 수정하지 않습니다.
