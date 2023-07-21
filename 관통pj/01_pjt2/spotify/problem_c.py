@@ -3,8 +3,18 @@ from pprint import pprint
 
 
 def artist_info(artists, genres):
-    # 여기에 코드를 작성합니다.
-    pass
+    artists_ifo = []
+
+    for artist in artists:
+        info = {}
+        info['genres_names'] = [genre['name'] for ids in artist['genres_ids'] for genre in genres if ids == genre['id']]
+        info['id'] = artist['id']
+        info['images'] = artist['images']
+        info['name'] = artist['name']
+        info['type'] = artist['type']
+        artists_ifo.append(info)
+
+    return artists_ifo
 
 
 # 아래의 코드는 수정하지 않습니다.

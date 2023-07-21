@@ -3,8 +3,16 @@ from pprint import pprint
 
 
 def artist_info(artist):
-    # 여기에 코드를 작성합니다.    
-    pass
+    jimin = {'genres_ids': artist['genres_ids'],
+             'id': artist['id'],
+             'images': artist['images'],
+             'name': artist['name'],
+             'type': artist['type']
+             }
+    # del artist['external_urls']       # del로 삭제시 return값 artist
+    # del artist['uri']
+
+    return jimin
 
 
 # 아래의 코드는 수정하지 않습니다.
