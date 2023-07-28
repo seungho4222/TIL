@@ -7,7 +7,21 @@ def ranking():
     # 여기에 코드를 작성합니다.
     URL = 'https://api.spotify.com/v1'
     headers = getHeaders()
-    pass
+    params = {
+        'q': 'genre:k-pop',
+        'type': 'track',
+        'market': 'KR',
+        'limit': 20
+    }
+
+    response = requests.get(f'{URL}/search', headers=headers, params=params).json()
+
+    result = response.get('tracks').get('items')
+
+    # 앨범발매일 최신순으로 정렬 후 5개 추출
+    date_sort = sorted([i['album']['release_date'] for i in result], reverse=True)
+
+    return date_sort[:5]
 
 
 # 아래의 코드는 수정하지 않습니다.

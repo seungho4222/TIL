@@ -6,8 +6,8 @@ import requests
 
 # 📌 여기에 발급받은 API_CLIENT_ID와 API_CLIENT_SECRET을 넣으세요.
 API_URL = 'https://api.spotify.com/v1'
-API_CLIENT_ID = ''
-API_CLIENT_SECRET = ''
+API_CLIENT_ID = 'bb4b2f4f83f849849f5819fe62b1e0ef'
+API_CLIENT_SECRET = '166b1523f4654d2abc8b1b9aedbd7d15'
 
 # 아래 코드는 수정하지 않습니다.
 data = {
