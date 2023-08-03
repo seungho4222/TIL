@@ -6,7 +6,7 @@ def snail_num(r, c, num, way):
         nr = r + dr[way % 4]
         nc = c + dc[way % 4]
         snail_num(nr, nc, num + 1, way)
-        if num != 17:
+        if num != N*N+1:
             nr = r + dr[(way + 1) % 4]
             nc = c + dc[(way + 1) % 4]
             snail_num(nr, nc, num + 1, way + 1)
