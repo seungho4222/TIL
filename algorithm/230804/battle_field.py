@@ -15,7 +15,7 @@ def down():
     global r
     field[r][c] = 'v'
     if r+1 < H and field[r+1][c] == '.':
-        field[r-1][c] = 'v'
+        field[r+1][c] = 'v'
         field[r][c] = '.'
         r = r+1
 def left():
@@ -74,6 +74,7 @@ for tc in range(1, T+1):
         for j in range(W):
             if field[i][j] in move:
                 r, c = i, j
+                break
     # 명령(order) 개수
     N = int(input())
     for o in input():
