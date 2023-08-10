@@ -1,6 +1,6 @@
-# import sys
-#
-# sys.stdin = open('input.txt', 'r')
+import sys
+
+sys.stdin = open('input.txt', 'r')
 
 
 T = 10
@@ -15,15 +15,12 @@ for tc in range(1, T + 1):
     stack = []
     i = 0
     visited[i] = 1
-    print(matrix)
     result = 0
     while True:
-        print(i)
-        if i == 99:
-            result = 1
-            break
         for j in matrix[i]:
-            if matrix[j] and not visited[j]:
+            if j == 99:
+                result = 1
+            if visited[j] == 0:
                 stack.append(i)
                 i = j
                 visited[j] = 1
