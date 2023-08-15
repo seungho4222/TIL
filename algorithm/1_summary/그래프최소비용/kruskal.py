@@ -15,7 +15,7 @@ def mst_kruskal(G):
             mst.append((u,v))       # 트리에 u, v 추가하기
             mst_cost += val
 
-
+    
 N = '정점의개수'
 parents = [0] * (N+1)     # 각 정점의 부모 원소(초기설정: 자기자신)
 def Make_set(x):
