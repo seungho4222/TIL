@@ -16,12 +16,20 @@ def mst_kruskal(G):
             mst_cost += val
 
 
-def Make_set(x): ...
+N = '정점의개수'
+parents = [0] * (N+1)     # 각 정점의 부모 원소(초기설정: 자기자신)
+def Make_set(x):
     # 유일한 멤버 x를 포함하는 새로운 집합을 생성하는 연산
+    parents[x] = x
+# parents = [i for i in range(N+1)]
 
-def Find_set(x): ...
+def Find_set(x):
     # x를 포함하는 집합을 찾는 오퍼레이션
     # 특정 노드에서 루트까지의 경로에 존재하는 노드가 루트를 부모로 가리키도록 갱신
+    while x != parents[x]:
+        x = parents[x]
+    return x
 
-def Union(x,y): ...
+def Union(x,y):
     # x와 y를 포함하는 두 집합을 통합하는 오퍼레이션
+    parents[Find_set(y)] = Find_set(x)
