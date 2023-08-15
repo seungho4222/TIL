@@ -27,7 +27,7 @@ def Prim(W):
     for i in range(2, n+1):
         nearest[i] = 1
         distance[i] = W[1][i]
-    for i in range(n-1):
+    for _ in range(n-1):
         minValue = INF
         for i in range(2, n+1):
             if (0 <= distance[i] and distance[i] < minValue):
