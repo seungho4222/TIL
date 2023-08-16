@@ -43,4 +43,5 @@ def perm2(i, selected):
             perm2(i + 1, selected)
             selected[i] = 0
 
+
 perm2(0, [0] * 5)
