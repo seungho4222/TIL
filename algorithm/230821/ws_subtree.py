@@ -1,3 +1,11 @@
+def preorder(n):
+    global cnt
+    if n != 0:
+        cnt += 1
+        preorder(cleft[n])
+        preorder(cright[n])
+
+
 T = int(input())
 for tc in range(1, T+1):
     E, N = map(int, input().split())
@@ -14,15 +22,17 @@ for tc in range(1, T+1):
             cright[p] = c
     # 자식노드 스택쌓으며 탐색
     cnt = 0
-    stack = [N]
-    while stack:
-        t = stack.pop(0)
-        cnt += 1
-        # 자식노드 있으면 스택 추가
-        if cleft[t]:
-            stack.append(cleft[t])
-        if cright[t]:
-            stack.append(cright[t])
+    preorder(N)
+
+    # stack = [N]
+    # while stack:
+    #     t = stack.pop(0)
+    #     cnt += 1
+    #     # 자식노드 있으면 스택 추가
+    #     if cleft[t]:
+    #         stack.append(cleft[t])
+    #     if cright[t]:
+    #         stack.append(cright[t])
 
     print(f'#{tc}', cnt)
 
