@@ -21,9 +21,9 @@ E.right = C
 
 def preorder(T):
     if T:
-        print(T)
-        preorder(T.left())
-        preorder(T.right())
+        print(T.data)
+        preorder(T.left)
+        preorder(T.right)
 
 
 preorder(A)
