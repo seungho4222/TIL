@@ -17,3 +17,17 @@ for tc in range(1, T+1):
     print(word)
     print(cleft)
     print(cright)
+
+
+'''
+8
+1 W 2 3
+2 F 4 5
+3 R 6 7
+4 O 8
+5 T
+6 A
+7 E
+8 S
+
+'''
