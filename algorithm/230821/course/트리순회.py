@@ -30,16 +30,16 @@ def preorder(t):
 # 중위순회: L - V - R
 def inorder(t):
     if t:
-        preorder(cleft[t])
+        inorder(cleft[t])
         print(t, end=' ')
-        preorder(cright[t])
+        inorder(cright[t])
 
 
 # 후위순회: L - R - V
 def postorder(t):
     if t:
-        preorder(cleft[t])
-        preorder(cright[t])
+        postorder(cleft[t])
+        postorder(cright[t])
         print(t, end=' ')
 
 
