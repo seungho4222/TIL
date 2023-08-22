@@ -1,9 +1,9 @@
 # 중위 순회
 def inorder(t):
-    global temp
+    global ans
     if t:
         inorder(cleft[t])
-        temp += [t]
+        ans += word[t]
         inorder(cright[t])    
 
 # 테스트케이스 10개
@@ -27,13 +27,10 @@ for tc in range(1, T+1):
             cleft[w] = int(i[2])
         if k > 3:       # 오른쪽 자식노드
             cright[w] = int(i[3])
-    # 중위순회한 정점순서 저장
-    temp = []
-    inorder(1)
+
     # 정점순서에 따른 해당정점 문자열 추출
     ans = ''
-    for i in temp:
-        ans += word[i]
+    inorder(1)
     
     print(f'#{tc} {ans}')
 
