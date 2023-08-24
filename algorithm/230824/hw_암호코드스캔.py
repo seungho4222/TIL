@@ -30,9 +30,18 @@ def bin_change(hex_string):
     k = len_bin // 56
     for c in range(len_bin - 1, -1, -1):
         if bin_string[c] == '1':
-            code += bin_string[c - (55 * k):c + 1]
+            code += bin_string[c - (56 * k) + 1:c + 1]
             break
-    return code
+
+    if k == 1:
+        return code
+    for x in range(1, k):
+        for y in range(len(code) - (56*x), -1, -1):
+            if code[y] != '0':
+                break
+        else:
+            print(code[len(code) - 56*x:])
+            return code[len(code) - 56*x:]
 
 
 # 8자리 숫자 변환
@@ -59,7 +68,7 @@ def nums_change(c):
     # 숫자 변경
     nums = []
     for j in code_ratio:
-        nums.append(pat[j])
+        nums.append(pat.get(j,0))
     return nums
 
 
