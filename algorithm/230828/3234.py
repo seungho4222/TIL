@@ -17,10 +17,12 @@ def scale(idx, left, right, used):
         return
     # 재봐야 할 경우 => 왼쪽, 오른쪽 각각 올려보기
     for i in range(N):
-        if i not in used:  # 사용 안했다면
-            scale(idx+1, left + weight[i], right, used + [i])  # 왼쪽 추가
+        if not used[i]:  # 사용 안했다면
+            used[i] = 1  # 사용 기록
+            scale(idx+1, left + weight[i], right, used)  # 왼쪽 추가
             if left >= right + weight[i]:  # 왼쪽이 큰 경우만
-                scale(idx+1, left, right + weight[i], used + [i])  # 오른쪽 추가
+                scale(idx+1, left, right + weight[i], used)  # 오른쪽 추가
+            used[i] = 0  # 기록 삭제
 
 
 T = int(input())
@@ -29,5 +31,5 @@ for tc in range(1, T + 1):
     weight = list(map(int, input().split()))  # 추 정보
     sum_w = sum(weight)  # 추 무게 총합
     cnt = 0  # 추 올리는 방법 수
-    scale(0, 0, 0, [])
+    scale(0, 0, 0, [0]*9)
     print(f'#{tc} {cnt}')
