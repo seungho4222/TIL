@@ -33,3 +33,35 @@ for tc in range(1, T + 1):
     cnt = 0  # 추 올리는 방법 수
     scale(0, 0, 0, [0]*9)
     print(f'#{tc} {cnt}')
+
+
+'''
+# 비트마스크 사용
+def dfs(left, right, bitmask):
+    if (left, right, bitmask) in memo.keys():
+        return memo[(left, right, bitmask)]
+ 
+    if bitmask == (1 << n) - 1:
+        return 1 
+  
+    cnt = 0
+    for i in range(n):
+        if bitmask & (1 << i):
+            continue
+        cnt += dfs(left + a[i], right, bitmask | (1 << i))
+        if right + a[i] <= left:
+            cnt += dfs(left, right + a[i], bitmask | (1 << i))
+  
+    memo[(left, right, bitmask)] = cnt
+    return cnt
+  
+T = int(input())
+for tc in range(1, T+1):
+    n = int(input())
+    a = tuple(map(int, input().split()))
+  
+    memo = dict()
+    res = dfs(0, 0, 0)
+  
+    print(f"#{tc} {res}")
+'''
