@@ -1,38 +1,40 @@
 from collections import deque
 
-dir = [[0, 1], [1, 0], [-1, 0], [0, -1]]
-
 T = int(input())
 for tc in range(1, T + 1):
     N, M = map(int, input().split())  # 가로, 세로
-    arr = [list(input()) for _ in range(N)]  # W: 물, L: 땅
-    memo = [[0] * M for _ in range(N)]
-
+    arr = [input() for _ in range(N)]  # W: 물, L: 땅
+    visited = [[0] * M for _ in range(N)]  # 방문 기록
+    water = deque()  # W 위치만 저장
     for i in range(N):
         for j in range(M):
             if arr[i][j] == 'W':
-                visited = [[0] * M for _ in range(N)]
-                stack = deque()
-                stack.append((i, j))
-                cnt = 1
-                while stack:
-                    l = len(stack)
-                    for _ in range(l):
-                        r, c = stack.popleft()
-                        visited[r][c] = 1
-                        for dr, dc in dir:
-                            nr, nc = r + dr, c + dc
-                            if 0 <= nr < N and 0 <= nc < M and arr[nr][nc] == 'L' and visited[nr][nc] == 0:
-                                stack.append((nr, nc))
-                                if memo[nr][nc] == 0:
-                                    memo[nr][nc] = cnt
-                                else:
-                                    if memo[nr][nc] != 0 and memo[nr][nc] <= memo[r][c]:
-                                        stack.pop()
-                                        continue
-                                    memo[nr][nc] = min(memo[nr][nc], cnt)
-                    cnt += 1
+                water.append((i, j, 0))  # W 좌표, 땅과 거리 저장
+
     result = 0
-    for k in memo:
-        result += sum(k)
+    while water:  # W에서 거리 1 찾아서 방문기록하고 거리 1 에서 거리 2 찾아서 ...
+        r, c, d = water.popleft()
+        for dr, dc in [[1, 0], [0, 1], [-1, 0], [0, -1]]:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < N and 0 <= nc < M and arr[nr][nc] == 'L' and visited[nr][nc] == 0:
+                water.append((nr, nc, d + 1))
+                visited[nr][nc] = d+1
+                result += d + 1
     print(f'#{tc} {result}')
+
+'''
+3
+2 3
+WLL
+LLL
+3 2
+WL
+LL
+LW
+4 5
+LLLWW
+WWLLL
+LLLWL
+LWLLL
+
+'''
