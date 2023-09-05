@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            height: 1000px;
+            border: 2px solid black;
+            /* 주축의 방향 */
+            flex-direction: row;
+            /* 줄 바꿀건지 */
+            flex-wrap: wrap;
+            /* 주축 정렬 */
+            /* justify-content: center; */
+            /* 교차축 정렬: 모든 콘텐츠를 하나로 보고 상하정렬 */
+            /* align-content: center; */
+            /* 교차축 정렬: 각 줄별로 상하정렬 */
+            /* align-items: center; */
+        }
+        .post {
+            background-color: gray;
+            border: 2px solid black;
+            margin: 0.5rem;
+            padding: 0.5rem;
+        }
+        .item1 {
+            align-self: center;
+        }
+        .item2 {
+            align-self: flex-end;
+        }
+        .item3 {
+            align-self: flex-start;
+        }
+        .item4 {
+            align-self: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="post item1">
+            <h2>Post Title 1</h2>
+            <p>Post Content 1</p>
+        </div>
+        <div class="post item2">
+            <h2>Post Title 2</h2>
+            <p>Post Content 2</p>
+        </div>
+        <div class="post item3">
+            <h2>Post Title 3</h2>
+            <p>Post Content 3</p>
+        </div>
+        <div class="post item4">
+            <h2>Post Title 4</h2>
+            <p>Post Content 4</p>
+        </div>
+    </div>
+</body>
+</html>
