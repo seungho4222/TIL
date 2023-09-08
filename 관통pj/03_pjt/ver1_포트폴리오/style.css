@@ -1,0 +1,42 @@
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.box {
+    height: 100%;
+    border: 1px solid black;
+}
+.skills-img {
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+}
+.img-gradient {
+    background: linear-gradient(
+        to left,
+        rgba(255,255,255,0) 10%,
+        rgba(255,255,255,0.3) 50%,
+        rgba(255,255,255,1) 100%
+        ), url("images/image1.jpg");
+    background-size: cover;
+}
+
+@media (max-width: 470px) {
+    .contact-info {
+        display: none !important;
+    }
+    .github, .insta {
+        display: none;
+    }
+    .project-row {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 650px) {
+    .img-gradient {
+        background: none;
+    }
+    .intro-row {
+        flex-direction: column;
+    }
+}
