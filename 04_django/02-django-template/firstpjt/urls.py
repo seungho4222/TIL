@@ -21,4 +21,11 @@ from articles import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('articles/', views.index),
+    path('dinner/', views.dinner),
+    path('search/', views.search),
+    path('throw/', views.throw),
+    path('catch/', views.catch),
+    # path converters 기본값은 str이므로 생략 가능
+    path('hello/<str:name>/', views.greeting),
+    path('articles/<int:num>/', views.detail),
 ]
