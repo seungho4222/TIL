@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content1 %}
+<div class="container">
+    <form action={% url "myapp:login" %} method="GET">
+        <label for="id">ID</label>
+        <input type="text" name="id" id="id">
+        <hr>
+        <label for="pw">PW</label>
+        <input type="password" name="pw" id="pw">
+        <hr>
+        <input type="submit" value="login">
+    </form>
+</div>
+{% endblock content1 %}
