@@ -33,7 +33,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # app 등록 권장 순서
+    # 1. normal app
     'articles',
+    # 2. third party app
+    'django_extensions',
+    # 3. django app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
