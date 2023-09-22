@@ -24,13 +24,11 @@ for tc in range(1, T + 1):
     E = float(input())  # 환경부담금 계수
     edge = []
     for i in range(N):
-        dist = float('inf')
+        # dist = float('inf')
         for j in range(N):
             if i != j:
                 calc = (abs(x_p[i] - x_p[j]) ** 2 + abs(y_p[i] - y_p[j]) ** 2) * E  # 환경부담금 계산
-                if dist > calc:
-                    dist = calc
-                    edge.append([calc, i, j])
+                edge.append([calc, i, j])
     edge.sort()
     p = list(range(N))
 
