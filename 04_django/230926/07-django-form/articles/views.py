@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article
 from .forms import ArticleForm
 
@@ -13,7 +13,8 @@ def index(request):
 
 
 def detail(request, pk):
-    article = Article.objects.get(pk=pk)
+    article = get_object_or_404(Article, pk=pk)
+    # article = Article.objects.get(pk=pk)
     context = {
         'article': article,
     }
