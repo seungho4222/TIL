@@ -1,0 +1,20 @@
+<style>
+    .card-img-top {
+        height: 15rem;
+        object-fit: cover;
+    }
+</style>
+
+<div class="row g-3">
+    {% for movie in movies %}
+    <div class="card col-sm-12 col-md-6 col-lg-4 mx-2 p-0" style="width: 18rem;">
+        <div class="card-header">
+            {{ movie.title }}
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ movie.summary }}</p>
+            <a href="{% url "movies:detail" movie.pk %}" class="btn btn-primary">Detail</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
