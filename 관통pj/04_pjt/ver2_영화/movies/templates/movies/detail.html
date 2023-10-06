@@ -2,7 +2,9 @@
 
 {% block content %}
     <h1>DETAIL PAGE</h1>
-    <img src="{{ movie.movie_image.url }}" alt="img" style="width: 12rem; height: 18rem; object-fit: cover;">
+    {% if movie.movie_image %}
+        <img src="{{ movie.movie_image.url }}" alt="img" style="width: 12rem; height: 18rem; object-fit: cover;">
+    {% endif %}
     <h2>{{ movie.title }}</h2>
     <p>{{ movie.summary }}</p>
     <hr>
