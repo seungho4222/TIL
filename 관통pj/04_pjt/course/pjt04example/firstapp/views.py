@@ -49,7 +49,22 @@ import pandas as pd
 csv_path = 'firstapp/data/austin_weather.csv'
 def example(request):
     df = pd.read_csv(csv_path)
+    df['Date'] = pd.to_datetime(df['Date'])
+    df_after_2014 = df[df['Date'] >= '2014-01-01']
+    plt.plot(df_after_2014['Date'], df_after_2014['TempHighF'], label='High')
+    plt.title('Temperature V')
+    plt.xlabel('Date')
+    plt.ylabel('Temparature')
+    plt.xticks(rotation=45)
+    plt.legend()
+
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8').replace('\n', '')
+    buffer.close()
+
+
     context = {
-        'df': df
+        'chart_image': f'data:image/png;base64,{image_base64}',
     }
     return render(request, 'example.html', context)

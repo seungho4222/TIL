@@ -16,7 +16,8 @@
 </head>
 <body>
     <h1>Pandas 써보기</h1>
-    <table>
+    <img src="{{ chart_image }}" alt="img">
+    {% comment %} <table>
         <tr>
             {% for column in df.columns %}
                 <th>{{ column }}</th>
@@ -29,6 +30,6 @@
                 {% endfor %}
             </tr>
         {% endfor %}
-    </table>
+    </table> {% endcomment %}
 </body>
 </html>
