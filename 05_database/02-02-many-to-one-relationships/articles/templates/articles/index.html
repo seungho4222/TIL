@@ -28,6 +28,8 @@
   <a href="{% url 'articles:create' %}">CREATE</a>
   <hr>
   {% for article in articles %}
+    <p>작성자 : {{ article.user }}</p>
+    {% comment %} <p>작성자 : {{ article.user.username }}</p> {% endcomment %}
     <p>글 번호 : {{ article.pk }}</p>
     <a href="{% url "articles:detail" article.pk %}">
       <p>글 제목 : {{ article.title }}</p>
