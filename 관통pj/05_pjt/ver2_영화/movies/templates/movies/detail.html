@@ -6,12 +6,38 @@
         <img src="{{ movie.movie_image.url }}" alt="img" style="width: 12rem; height: 18rem; object-fit: cover;" class="mb-2">
     {% endif %}
     <h2>{{ movie.title }}</h2>
-    <p>{{ movie.summary }}</p>
+    <p>{{ movie.description }}</p>
+    <p>장르 : {{ movie.genre }}</p>
+    <p>평점 : {{ movie.score }}</p>
     <hr>
     <a href="{% url "movies:update" movie.pk %}" class="btn btn-secondary">UPDATE</a>
     <form action="{% url "movies:delete" movie.pk %}" method="POST" class="d-inline-block">
         {% csrf_token %}
         <input type="submit" value="DELETE" class="btn btn-danger">
+    </form>
+    <hr>
+    <h3>댓글 목록</h3>
+    <div class="card mb-3">
+        <ul class="list-group list-group-flush">
+        {% for comment in movie.comment_set.all %}
+            <li class="list-group-item d-flex justify-content-between">
+                <span>{{ comment.user }} - {{ comment.content }}</span>
+                <a href="{% url "movies:comments_delete" movie.pk comment.pk %}" class="btn btn-danger btn-sm">DELETE</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">
+                댓글을 입력해주세요 !
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
+
+
+    <form action="{% url "movies:comments_create" movie.pk %}" method="POST">
+        {% csrf_token %}
+        {{ comment_form }}
+        <input type="submit" value="제출">
     </form>
     <hr>
     <a href="{% url "movies:index" %}" class="btn btn-primary">BACK</a>

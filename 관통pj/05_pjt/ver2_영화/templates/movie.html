@@ -5,7 +5,7 @@
             {{ movie.title }}
         </div>
         <div class="card-body">
-            <p class="card-text">{{ movie.summary }}</p>
+            <p class="card-text">{{ movie.description }}</p>
             <a href="{% url "movies:detail" movie.pk %}" class="btn btn-primary">Detail</a>
         </div>
     </div>

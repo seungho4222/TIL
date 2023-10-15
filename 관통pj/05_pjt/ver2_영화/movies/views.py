@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Movie
-from .forms import MovieForm
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST, require_http_methods, require_safe
+from django.views.decorators.http import require_POST, require_http_methods, require_safe, require_GET
+from .models import Movie, Comment
+from .forms import MovieForm, CommentForm
 
 
 @require_safe
@@ -20,7 +20,9 @@ def create(request):
     if request.method == 'POST':
         form = MovieForm(request.POST, request.FILES)
         if form.is_valid():
-            movie = form.save()
+            movie = form.save(commit=False)
+            movie.user = request.user
+            form.save()
             return redirect('movies:detail', movie.pk)
     else:
         form = MovieForm()
@@ -33,8 +35,10 @@ def create(request):
 @require_safe
 def detail(request, pk):
     movie = Movie.objects.get(pk=pk)
+    comment_form = CommentForm()
     context = {
-        'movie': movie
+        'movie': movie,
+        'comment_form': comment_form,
     }
     return render(request, 'movies/detail.html', context)
 
@@ -63,3 +67,28 @@ def update(request, pk):
         'form': form
     }
     return render(request, 'movies/update.html', context)
+
+
+@require_POST
+def comments_create(request, pk):
+    movie = Movie.objects.get(pk=pk)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.user = request.user
+        comment.movie = movie
+        comment_form.save()
+        return redirect('movies:detail', movie.pk)
+    context = {
+        'movie': movie,
+        'comment_form': comment_form
+    }
+    return render(request, 'movies/detail.html', context)
+
+
+@require_GET
+def comments_delete(request, movie_id, comment_id):
+    comment = Comment.objects.get(pk=comment_id)
+    if request.user == comment.user:
+        comment.delete()
+    return redirect('movies:detail', movie_id)
