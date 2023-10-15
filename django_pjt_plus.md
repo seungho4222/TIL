@@ -1,8 +1,9 @@
-## 📍 forms.py
+# :whale: 장고 프로젝트 응용
 
-##### 🔻 폼 출력형식 (Choic, Float)
+## ✨ 폼 출력형식 (Choic, Float)
 
 ```py
+# apps/forms.py
 class MovieForm(forms.ModelForm):
     genre = forms.ChoiceField(choices=[
         ('Comdey', 'Comedy'),
