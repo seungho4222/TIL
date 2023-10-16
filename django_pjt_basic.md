@@ -1,16 +1,16 @@
 # :rabbit: 장고 프로젝트 기본 과정
 
-[settings.py](#-settingspy)
+[📍 settings.py](#-settingspy)
 
-[urls.py](#-urlspy)
+[📍 urls.py](#-urlspy)
 
-[views.py](#-viewspy)
+[📍 views.py](#-viewspy)
 
-[models.py](#-modelspy)
+[📍 models.py](#-modelspy)
 
-[fomrs.py](#-formspy)
+[📍 fomrs.py](#-formspy)
 
-[admin.py](#-adminpy)
+[📍 admin.py](#-adminpy)
 
 ---
 
