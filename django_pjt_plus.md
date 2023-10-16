@@ -1,5 +1,15 @@
 # :whale: 장고 프로젝트 응용
 
+[✨ 폼 출력형식 (Choic, Float)](#-폼-출력형식-choic-float)
+
+[🧑‍🤝‍🧑 Many To Many Field (M : N 관계)](#-many-to-many-field-m--n-관계)
+
+[❤️ 좋아요 구현](#-좋아요-구현)
+
+[#️⃣ 해쉬태그 구현](#️-해쉬태그-구현)
+
+---
+
 ## ✨ 폼 출력형식 (Choic, Float)
 
 ```py
@@ -23,7 +33,7 @@ class MovieForm(forms.ModelForm):
 ```
 
 
-## Many To Many Field (M : N 관계)
+## 🧑‍🤝‍🧑 Many To Many Field (M : N 관계)
 ```py
 class Patient(models.Model):  # 역참조 시 사용하는 manager name 변경
     doctors = models.ManyToManyField(Doctor, related_name='patients')
@@ -43,7 +53,7 @@ class Article(models.Model):  # 유저필드와 역참조 매니저 충돌 방�
 ```
 
 
-## 좋아요 구현
+## ❤️ 좋아요 구현
 ```py
 # models.py
 class Article(models.Model):
@@ -59,6 +69,7 @@ class Article(models.Model):
 def likes(request, article_pk):
     article = Article.objects.get(pk=article_pk)
     if request.user in article.like_users.all():
+    # if article.like_users.filter(pk=request.user.pk).exists():
         article.like_users.remove(request.user)
         # request.user.like_articles.remove(article)
     else:
@@ -80,7 +91,7 @@ def likes(request, article_pk):
 ```
 
 
-## 해쉬태그 구현
+## #️⃣ 해쉬태그 구현
 ```py
 # models.py
 class Hashtag(models.Model):
@@ -132,5 +143,5 @@ def hashtag_link(article):
 
 
 # detail.html
-# <p>내용 : {{ article|hashtag_link|safe }}</p> 과 같이 사용
+<p>내용 : {{ article|hashtag_link|safe }}</p> 과 같이 사용
 ```
