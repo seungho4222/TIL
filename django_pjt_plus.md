@@ -43,6 +43,31 @@ class Article(models.Model):  # 유저필드와 역참조 매니저 충돌 방�
 ```
 
 
+## 좋아요 구현
+```py
+# models.py
+class Article(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_articles')
+
+
+# urls.py
+    path('<int:article_pk>/likes/', views.likes, name='likes'),
+
+
+# views.py
+def likes(request, article_pk):
+    article = Article.objects.get(pk=article_pk)
+    if request.user in article.like_users.all():
+        article.like_users.remove(request.user)
+        # request.user.like_articles.remove(article)
+    else:
+        article.like_users.add(request.user)
+        # request.user.like_articles.add(article)
+    return redirect('articles:index')
+```
+
+
 ## 해쉬태그 구현
 ```py
 # models.py
