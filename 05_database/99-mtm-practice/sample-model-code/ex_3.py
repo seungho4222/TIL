@@ -38,6 +38,6 @@ doctor1.patient_set.remove(patient1)
 doctor1.patient_set.all()
 patient1.doctors.all()
 
-patient2.patient_set.remove(doctor1)
+patient2.doctors.remove(doctor1)
 patient2.doctors.all()
 doctor1.patient_set.all()
