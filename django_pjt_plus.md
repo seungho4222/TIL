@@ -41,3 +41,59 @@ class Article(models.Model):  # 유저필드와 역참조 매니저 충돌 방�
     title = models.CharField(max_length=10)
     content = models.TextField()
 ```
+
+
+## 해쉬태그 구현
+```py
+# models.py
+class Hashtag(models.Model):
+    content = models.TextField(unique=True)
+
+class Article(models.Model):
+    hashtags = models.ManyToManyField(Hashtag, blank=True)
+
+
+# urls.py
+    path('<int:hash_pk>/hashtag/', views.hashtag, name='hashtag'),
+
+
+# views.py
+def hashtag(request, hash_pk):
+    hashtag = get_object_or_404(Hashtag, pk=hash_pk)
+    # pk 역순 조회
+    articles = hashtag.article_set.order_by('-pk')
+    context = {
+        'hashtag': hashtag,
+        'articles': articles,
+    }
+    return render(request, 'articles/hashtag.html', context)
+
+def create(request):
+    if form.is_valid():
+        ... # 해쉬태그 생성
+        for word in article.content.split():
+            if word.startswith("#"):
+                # 조건을 만족하면 가져오고 없으면 생성
+                hashtag, created = Hashtag.objects.get_or_create(content=word)
+                article.hashtags.add(hashtag)
+
+
+# pjt/templatetags/make_link.py (__init__.py 도 생성)
+from django import template
+
+register = template.Library()
+
+@register.filter
+def hashtag_link(article):
+    content = article.content
+    hashtags = article.hashtags.all()
+    # '#'으로 시작하는 단어가 존재 => 링크로 만들어 주기
+    for hashtag in hashtags:
+        content = content.replace(hashtag.content,
+            f'<a href="/articles/{hashtag.pk}/hashtag/">{hashtag.content}</a>')
+    return content
+
+
+# detail.html
+# <p>내용 : {{ article|hashtag_link|safe }}</p> 과 같이 사용
+```
