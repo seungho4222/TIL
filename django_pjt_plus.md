@@ -65,6 +65,18 @@ def likes(request, article_pk):
         article.like_users.add(request.user)
         # request.user.like_articles.add(article)
     return redirect('articles:index')
+
+
+# index.html
+<p>{{ article.like_users.all|length }}</p>  # DTL 함수 : 개수 카운트
+<form action="{% url "articles:likes" article.pk %}" method="POST">
+    {% csrf_token %}
+    {% if request.user in article.like_users.all %}
+        <input type="submit" value="좋아요 취소">
+    {% else %}
+        <input type="submit" value="좋아요">
+    {% endif %}
+</form>
 ```
 
 
