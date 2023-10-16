@@ -8,6 +8,8 @@
 
 [🔔 해쉬태그 구현](#-해쉬태그-구현)
 
+[☑️ 팔로우 구현](#-팔로우-구현)
+
 ---
 
 ## ✨ 폼 출력형식 (Choic, Float)
@@ -144,4 +146,47 @@ def hashtag_link(article):
 
 # detail.html
 <p>내용 : {{ article|hashtag_link|safe }}</p> 과 같이 사용
+```
+
+
+## ☑️ 팔로우 구현
+```py
+# models.py
+class User(AbstractUser):
+    followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
+
+
+# urls.py
+    path('<int:user_pk>/follow/', views.follow, name='follow'),
+
+
+# views.py
+def follow(request, user_pk):
+    person = get_object_or_404(get_user_model(), pk=user_pk)
+    if person.followers.filter(pk=request.user.pk).exists():
+    # if request.user in person.followers.all():
+        person.followers.remove(request.user)
+    else:
+        person.followers.add(request.user)
+    return redirect('accounts:profile', person.username)
+
+
+# profile.html
+<div> 
+    <div>
+    팔로잉 : {{ person.followings.all|length }} / 팔로워 : {{ person.followers.all|length }}
+    </div>
+    <div>
+        <form action="{% url 'accounts:follow' person.pk %}" method="POST">
+        {% csrf_token %}
+        {% if person != request.user %}
+            {% if user in person.followers.all %}
+            <button>Unfollow</button>
+            {% else %}
+            <button>Follow</button>
+            {% endif %}
+        {% endif %}
+        </form>
+    </div>
+</div>
 ```
