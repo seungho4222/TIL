@@ -1,27 +1,3 @@
-# count = 0
-# def create_1(x):
-#     global count
-#     if x == 1:
-#         return
-    
-#     if x % 3 == 0:
-#         x //= 3
-#         count += 1
-#         return create_1(x)
-#     elif x % 2 == 0 and (x-1) % 3 != 0:
-#         x //= 2
-#         count += 1
-#         return create_1(x)
-#     else:
-#         x -= 1
-#         count += 1
-#         return create_1(x)
-
-# create_1(int(input()))
-
-# print(count)
-
-
 def min_operations_to_one(N):
     # memoization을 위한 배열 초기화
     dp = [0] * (N + 1)
