@@ -4,7 +4,7 @@
 
 [🧑‍🤝‍🧑 Many To Many Field (M : N 관계)](#-many-to-many-field-m--n-관계)
 
-[❤️ 좋아요 구현](#-좋아요-구현)
+[💕 좋아요 구현](#-좋아요-구현)
 
 [#️⃣ 해쉬태그 구현](#️-해쉬태그-구현)
 
@@ -53,7 +53,7 @@ class Article(models.Model):  # 유저필드와 역참조 매니저 충돌 방�
 ```
 
 
-## ❤️ 좋아요 구현
+## 💕 좋아요 구현
 ```py
 # models.py
 class Article(models.Model):
