@@ -189,4 +189,21 @@ def follow(request, user_pk):
         </form>
     </div>
 </div>
+<div> 
+    <div>
+    팔로잉 : {{ person.followings.all|length }} / 팔로워 : {{ person.followers.all|length }}
+    </div>
+    {% if person != request.user %}
+    <div>
+        <form action="{% url 'accounts:follow' person.pk %}" method="POST">
+            {% csrf_token %}
+            {% if request.user in person.followers.all %}
+                <button>Unfollow</button>
+            {% else %}
+                <button>Follow</button>
+            {% endif %}
+        </form>
+    </div>
+    {% endif %}
+</div>
 ```
