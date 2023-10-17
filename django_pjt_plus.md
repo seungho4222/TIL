@@ -163,11 +163,12 @@ class User(AbstractUser):
 # views.py
 def follow(request, user_pk):
     person = get_object_or_404(get_user_model(), pk=user_pk)
-    if person.followers.filter(pk=request.user.pk).exists():
-    # if request.user in person.followers.all():
-        person.followers.remove(request.user)
-    else:
-        person.followers.add(request.user)
+    if person != request.user:
+        if person.followers.filter(pk=request.user.pk).exists():
+        # if request.user in person.followers.all():
+            person.followers.remove(request.user)
+        else:
+            person.followers.add(request.user)
     return redirect('accounts:profile', person.username)
 
 
