@@ -128,7 +128,7 @@ def create(request):
                 article.hashtags.add(hashtag)
 
 
-# pjt/templatetags/make_link.py (__init__.py 도 생성)
+# apps/templatetags/make_link.py (__init__.py 도 생성)
 from django import template
 
 register = template.Library()
