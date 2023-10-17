@@ -30,6 +30,7 @@ DEBUG = True
 INSTALLED_APPS = [
     'articles',
     'accounts',
+    'django_seed',
     'django_extensions',
     'debug_toolbar',
     "django.contrib.admin",
