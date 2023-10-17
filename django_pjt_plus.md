@@ -145,6 +145,8 @@ def hashtag_link(article):
 
 
 # detail.html
+{% load make_link %}
+
 <p>내용 : {{ article|hashtag_link|safe }}</p> 과 같이 사용
 ```
 
