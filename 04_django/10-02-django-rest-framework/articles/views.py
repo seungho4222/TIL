@@ -5,7 +5,24 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from .models import Article, Comment
 from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer
 
+from drf_spectacular.utils import extend_schema, OpenApiExample
+from drf_spectacular.types import OpenApiTypes
 
+
+@extend_schema(
+        # 응답 예시
+        examples=[
+            OpenApiExample('Article', value={"title": "title", "content": "content"}, status_codes=[201]),
+            OpenApiExample('Error', value={"field": "err msg"}, status_codes=[400])
+        ],
+        # 응답 형태
+        responses={
+            (201, 'application/json') : OpenApiTypes.OBJECT,
+            (400, 'application/json') : OpenApiTypes.OBJECT,
+        },
+        # 요청 형태
+        request={'application/json' : OpenApiTypes.OBJECT},
+)
 @api_view(['GET', 'POST'])
 def article_list(request):
     if request.method == 'GET':
