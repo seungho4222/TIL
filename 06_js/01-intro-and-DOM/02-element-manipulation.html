@@ -23,6 +23,22 @@
     <li>list1</li>
     <li>list2</li>
   </ul>
+  <script>
+    // 속성 조작
+    // 1. 클래스 속성 조작
+    const h1Tag = document.querySelector('.heading')
+    console.log(h1Tag.classList)
+
+    h1Tag.classList.add('red')
+    console.log(h1Tag.classList)
+
+    h1Tag.classList.remove('red')
+    console.log(h1Tag.classList)
+
+    h1Tag.classList.toggle('red')
+    console.log(h1Tag.classList)
+
+  </script>
 </body>
 
 </html>
