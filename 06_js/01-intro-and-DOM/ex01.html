@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="one">
+    <h1>DIV1</h1>
+  </div>
+  <div class="two">
+    <h1>DIV2</h1>
+  </div>
+  <input type="text" value="hello">
+  <input type="number" value="777">
+  <div>
+    <textarea name="" id="" cols="30" rows="10">HELLO</textarea>
+  </div>
+  <script>
+    // 1. class가 two 인 element의 자식 h1요소의 텍스트 출력 (DIV2)
+    console.log(document.querySelector('.two > h1').textContent)
+    // 2. type 속성이 text인 input안의 값 출력 (hello)
+    console.log(document.querySelector('input[type="text"]').value)
+    // 3. type 속성이 number인 input안의 값 출력 (777)
+    console.log(document.querySelector('input[type="number"]').value)
+    // 4. textarea 안의 문자열 GOOD 으로 변경
+    const textareaTag = document.querySelector('textarea')
+    textareaTag.textContent = 'GOOD'
+  </script>
+</body>
+</html>
