@@ -10,6 +10,19 @@
 
 <body>
   <script>
+    // 블록 스코프
+    let x = 1
+    if (x == 1) {
+      let x = 2
+      console.log(x) // 2
+    }
+    console.log(x) // 1
+    
+    // 템플릿 리터럴
+    const age = 100
+    const message = `홍길동은 ${age}세입니다.`
+    console.log(message)
+
   </script>
 </body>
 
