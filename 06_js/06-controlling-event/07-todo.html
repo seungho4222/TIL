@@ -6,6 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .done {
+      text-decoration: line-through;
+    }
+  </style>
 </head>
 
 <body>
@@ -25,6 +30,7 @@
       if (inputData.trim()) {
         const liTag = document.createElement('li')
         liTag.textContent = inputData
+        liTag.className = "todo"
         ulTag.append(liTag)
         inputData.value = ''
       } else {
@@ -45,6 +51,23 @@
 
     // 2. 버튼에 이벤트 핸들러를 부착
     btn.addEventListener('click', addTodo)
+
+    // 3. todo 클릭시 텍스트에 줄긋기 토글
+    ulTag.addEventListener("click", function(e) {
+      // li태그가 아니면 이벤트 함수 종료
+      if(!e.target.classList.contains("todo")) {
+        return
+      }
+      e.target.classList.toggle("done")
+    })
+
+    // 4. input 태그에서 엔터키 눌러서 추가하기
+    inputTag.addEventListener("keyup", function(e) {
+      // 내가 누른 키가 enter 인 경우에만 todo 추가
+      if (e.key === "Enter"){
+        addTodo(e)
+      }
+    })
 
   </script>
 </body>

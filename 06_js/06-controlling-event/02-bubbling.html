@@ -35,6 +35,7 @@
     }
     const clickHandler3 = function (event) {
       console.log('p가 클릭되었습니다.')
+      event.stopPropagation() // 현재 target 이후 이벤트 전달 중단
     }
 
     formElement.addEventListener('click', clickHandler1)

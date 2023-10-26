@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card {
+            margin: 5px auto;
+            padding: 5px;
+            width: 50%;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>ONE</h1>
+            <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt modi eaque commodi debitis id optio, consectetur distinctio ratione dolorem aperiam eius maiores delectus, consequuntur praesentium earum tempora quidem vel nostrum?
+            </p>
+            <hr>
+            <button class="remove-btn">X</button>
+        </div>
+        <div class="card">
+            <h1>TWO</h1>
+            <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi id eum veritatis eveniet dolorum? Earum veritatis soluta animi maxime neque, molestias dolorum qui quibusdam sunt corporis explicabo tenetur reprehenderit nulla.
+            </p>
+            <hr>
+            <button class="remove-btn">X</button>
+        </div>
+        <div class="card">
+            <h1>THREE</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam dolorem unde qui recusandae iusto odit ad debitis, alias adipisci ut voluptates ex sunt soluta rem sit eaque veniam veritatis quia!
+            </p>
+            <hr>
+            <button class="remove-btn">X</button>
+        </div>
+    </div>
+    <!-- js 작성 -->
+    <script>
+        // 1. 모든 버튼 찾아서 이벤트 달기
+        const btn = document.querySelectorAll("button")
+        const container = document.querySelector(".container")
+
+        // const remove = function (event) {
+        //     container.removeChild(event.target.parentElement)
+        // }
+
+        // btn.forEach((button) => {
+        //     button.addEventListener("click", remove)
+        // })
+
+        // 2. 이벤트 위임 활용해서 부모요소에만 이벤트 달기
+        container.addEventListener("click", function(e) {
+            if (e.target.className !== "remove-btn"){
+                return
+            }
+            container.removeChild(e.target.parentElement)
+        })
+    </script>
+</body>
+</html>
