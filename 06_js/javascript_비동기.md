@@ -19,8 +19,11 @@
 
 ## 2. AJAX
 
-#### Asynchronous JavaScript + XML
+#### AJAX (Asynchronous JavaScript + XML)
 - JavaScript의 비동기 구조와 XML 객체를 활용해 비동기적으로 서버와 통신하여 웹 페이지의 일부분만을 업데이트하는 웹 개발 기술
+
+#### XHR 객체 (XMLHttpRequest 객체)
+- 서버와 상호작용할 때 사용하며 페이지의 새로고침없이도 URL에서 데이터를 가져올 수 있음
 
 #### Axios
 - JavaScript에서 사용되는 Promise 기반 HTTP 클라이언트 라이브러리 (서버와의 HTTP 요청과 응답을 간편하게 처리할 수 있도록 도와주는 도구)
