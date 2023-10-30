@@ -17,8 +17,8 @@
 
     const getCats = function () {
       axios({
-      method: 'get',
-      url: URL
+        method: 'get',
+        url: URL
       })
         .then((response) => {
           const imgUrl = response.data[0].url
