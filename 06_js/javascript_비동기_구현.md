@@ -8,7 +8,7 @@
 
 ## 🧸 팔로우 구현
 ```py
-# view.py
+# views.py
 from django.http import JsonResponse
 
 @login_required
@@ -110,7 +110,7 @@ def follow(request, user_pk):
 
 ## 💕 좋아요 구현
 ```py
-# view.py
+# views.py
 from django.http import JsonResponse
 
 @login_required
@@ -124,6 +124,7 @@ def likes(request, article_pk):
     is_liked = True
   context = {
     'is_liked': is_liked,
+    'count': article.like_users.count(),
   }
   return JsonResponse(context)
 ```
@@ -138,6 +139,10 @@ def likes(request, article_pk):
     <input type="submit" value="좋아요" id="like-{{ article.pk }}">
   {% endif %}
 </form>
+<p>
+  <span id="like-count-{{ article.pk }}">{{ article.like_users.all|length }}</span>명이 이 글을 좋아합니다.
+</p>
+
 
 <!-- javascript -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -160,7 +165,6 @@ def likes(request, article_pk):
         .then((response) => {
 
           const isLiked = response.data.is_liked
-
           const likeBtn = document.querySelector(`#like-${articleId}`)
           
           if (isLiked === true) {
@@ -168,10 +172,123 @@ def likes(request, article_pk):
           } else {
             likeBtn.value = '좋아요'
           }
+          // likeButton.innerText = liked ? '좋아요 취소' : '좋아요'
+
+          const likeCount = document.querySelector(`#like-count-${articleId}`)
+          const count = response.data.count
+
+          likeCount.innerText = count
+
         })
         .catch((error) => {
           console.log(error)
         })
+    })
+  })
+</script>
+```
+
+## 💕 댓글 구현
+```py
+# views.py
+import json
+
+@require_POST
+def comments_create(request, pk):
+  if request.user.is_authenticated:
+    article = get_object_or_404(Article, pk=pk)
+
+    # 1. 클라이언트에서 data 속성을 일반 json 객체로 보냈을 경우
+    # request.body 안의 json 데이터 뽑아서 처리후 사용
+    json_data = json.loads(request.body)
+    comment_form = CommentForm(json_data)
+    
+    # 2. 클라이언트에서 data 속성을 FormData 객체로 보냈을 경우
+    comment_form = CommentForm(request.POST)
+    
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.article = article
+        comment.user = request.user
+        comment.save()
+        context = {
+            "commentPk": comment.pk 
+        }
+        return JsonResponse(context, status=200)
+    return redirect('articles:detail', article.pk)
+  return redirect('accounts:login')
+```
+
+```html
+<!-- detail.html -->
+<ul id="comment-list">  <!-- id 추가 -->
+  {% for comment in comments %}
+    <!-- 생략 -->
+    <p id="no-comment">댓글이 없어요..</p>  <!-- id 추가 -->
+  {% endfor %}
+</ul>
+
+{% if request.user.is_authenticated %}
+  <form id="comment-form" data-article-id="{{ article.pk }}">  <!-- id 추가 -->
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="submit">
+  </form>
+
+<!-- javascript -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const form = document.querySelector('#comment-form')
+  const input = document.querySelector('[name=content]')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+  // 댓글 달기위한 부모 노드
+  const ul = document.querySelector('#comment-list')
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault()
+    const content = input.value  // 댓글 입력
+    const articleId = event.target.dataset.articleId
+    const baseURL = "http://127.0.0.1:8000/"
+
+    // 1. data 속성을 일반 json 객체로 보내주기
+    const data = {
+      "content": content
+    }
+    // 2. FormData 객체 사용
+    const data = new FormData()
+    data.append("content", content)
+
+    axios({
+      method: 'post',
+      baseURL,
+      url: `articles/${ articleId }/comments/`,
+      headers: {'X-CSRFToken': csrftoken,},
+      data,
+    }).then(response => {
+      const {commentPk} = response.data
+      
+      // 댓글 객체 생성
+      const li = document.createElement("li")
+      li.innerHTML = `
+      {{ user.username }} - ${content}
+      <form action="/articles/${articleId}/comments/${commentPk}/delete/" method="POST" class="d-inline">
+        {% csrf_token %}
+        <input type="submit" value="DELETE">
+      </form>
+      `
+
+      // 댓글 생성시 노코멘트 문구 삭제
+      const nc_p = document.querySelector('#no-comment')
+      if (nc_p) {
+        ul.removeChild(nc_p)
+      }
+
+      // 댓글 추가
+      ul.appendChild(li)
+
+      // 인풋 초기화
+      input.value = ""
     })
   })
 </script>
