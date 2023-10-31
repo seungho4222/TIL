@@ -54,20 +54,25 @@ def follow(request, user_pk):
   {% endif %}
 </div>
 
+
 <!-- javascript -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   // 1. form 요소 선택
   const formTag = document.querySelector('#follow-form')
+
   // 6. csrftoken value 값 선택
   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
 
   // 2. form 요소에 이벤트 리스터 부착
   formTag.addEventListener('submit', function (event) {
+
     // 3. submit 이벤트 기본 동작 취소
     event.preventDefault()
+
     // 5. form 요소에 지정한 data 속성 접근하기
     const userId = formTag.dataset.userId
+
     // 4. axios 사용하여 비동기적으로 팔로우/언팔로우 요청
     axios({
       method: 'post',
@@ -75,10 +80,13 @@ def follow(request, user_pk):
       headers: {'X-CSRFToken': csrftoken},
     })
       .then((response) => {
+
         // 7. Django에서 보낸 follow 여부를 알 수 있는 변수를 저장
         const isFollowed = response.data.is_followed
+
         // 8. 팔로우 버튼 조작
         const followBtn = document.querySelector('input[type=submit]')
+
         // 9. 팔로우 버튼 토글
         if (isFollowed === true) {
         followBtn.value = 'Unfollow'
@@ -135,6 +143,7 @@ def likes(request, article_pk):
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   const formTags = document.querySelectorAll('.like-forms')
+
   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
 
   formTags.forEach((formTag) => {
@@ -149,8 +158,11 @@ def likes(request, article_pk):
         headers: {'X-CSRFToken': csrftoken,},
       })
         .then((response) => {
+
           const isLiked = response.data.is_liked
+
           const likeBtn = document.querySelector(`#like-${articleId}`)
+          
           if (isLiked === true) {
             likeBtn.value = '좋아요 취소'
           } else {
