@@ -4,6 +4,8 @@
 
 [💕 좋아요 구현](#-좋아요-구현)
 
+[📝 댓글 구현](#-댓글-구현)
+
 ---
 
 ## 🧸 팔로우 구현
@@ -188,7 +190,7 @@ def likes(request, article_pk):
 </script>
 ```
 
-## 💕 댓글 구현
+## 📝 댓글 구현
 ```py
 # views.py
 import json
