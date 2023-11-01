@@ -8,7 +8,30 @@
 </head>
 
 <body>
-  <script></script>
+  <div id="app">
+    <h1>{{ greeting }}</h1>
+    <label for="count">count : </label>
+    <button @click="count++" name="count">{{ count }}</button>
+    <p>이것도?? {{ count }}</p>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() { // 변수를 return해야 템플릿에서 사용 가능
+        const count = ref(0)
+        const greeting = ref('Hello')
+        return {
+          count,
+          greeting
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
 </body>
 
 </html>
