@@ -10,8 +10,22 @@
 <body>
   <div id="app">
     <!-- template syntax -->
+    <p>mesaage : {{ msg }}</p>
+    <div v-html="rawHtml"></div>
+    <div v-bind:id="dynamicId"></div>
+    <div>{{ number + 1 }}</div>
+    <div>{{ ok ? 'Yes' : 'No' }}</div>
+    <div>{{ msg.split('').reverse().join('') }}</div>
+    <div v-bind:id="`list-${id}`"></div>
 
     <!-- directive -->
+    <p v-if="seen">Hello</p>
+    <a v-bind:href="myUrl">Link</a>
+    <button v-on:click="doSomething">버튼</button>
+    <form v-on:submit.prevent="onSubmit">
+      <input type="submit">
+    </form>
+
   </div>
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -25,7 +39,7 @@
         const dynamicId = ref('my-id')
         const number = ref(1)
         const ok = ref(false)
-        const seen = ref(true)
+        const seen = ref(false)
         const id = ref(100)
         const myUrl = 'https://www.google.co.kr/'
         const doSomething = function () {

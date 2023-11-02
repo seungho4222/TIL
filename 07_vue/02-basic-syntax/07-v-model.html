@@ -10,22 +10,22 @@
 <body>
   <div id="app">
     <!-- single checkbox -->
-    <input type="checkbox" id="checkbox">
-    <label for="checkbox"></label>
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
 
     <!-- multiple checkbox -->
-    <div>Checked names: </div>
+    <div>Checked names: {{ checkedNames }}</div>
 
-    <input type="checkbox" id="alice" value="Alice">
+    <input type="checkbox" id="alice" value="Alice" v-model="checkedNames">
     <label for="alice">Alice</label>
 
-    <input type="checkbox" id="bella" value="Bella">
+    <input type="checkbox" id="bella" value="Bella" v-model="checkedNames">
     <label for="bella">Bella</label>
 
     <!-- single select -->
-    <div>Selected: </div>
+    <div>Selected: {{ selected }}</div>
 
-    <select>
+    <select v-model="selected">
       <option disabled value="">Please select one</option>
       <option>Alice</option>
       <option>Bella</option>
@@ -39,7 +39,14 @@
 
     const app = createApp({
       setup() {
-        return {}
+        const checked = ref(false)
+        const checkedNames = ref([])
+        const selected = ref('')
+        return {
+          checked,
+          checkedNames,
+          selected,
+        }
       }
     })
 

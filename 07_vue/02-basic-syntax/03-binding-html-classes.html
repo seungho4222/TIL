@@ -19,25 +19,37 @@
 <body>
   <div id="app">
     <!-- Binding to Objects -->
-    <div>Text</div>
-    <div class="static">Text</div>
-    <div class="static">Text</div>
+    <div :class="{ active: isActive }">Text</div>
+    <div class="static" :class="{ 'text-primary': hasInfo }">Text</div>
+    <div class="static" :class="classObj">Text</div>
 
     <!-- Binding to Arrays -->
-    <div>Text</div>
-    <div>Text</div>
+    <div :class="[activeClass, infoClass]">Text</div>
+    <div :class="[{active: isActive}, infoClass]">Text</div>
   </div>
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script>
     const { createApp, ref } = Vue
-
     const app = createApp({
       setup() {
-        return {}
+        const isActive =ref(true)
+        const hasInfo = ref(true)
+        const classObj = ref({
+          active: isActive,
+          'text-primary': hasInfo
+        })
+        const activeClass = ref('active')
+        const infoClass = ref('text-primary')
+        return {
+          isActive,
+          hasInfo,
+          classObj,
+          activeClass,
+          infoClass
+        }
       }
     })
-
     app.mount('#app')
   </script>
 </body>
