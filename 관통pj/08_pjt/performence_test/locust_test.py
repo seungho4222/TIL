@@ -8,6 +8,7 @@ class SampleUser(HttpUser):
 
     @task
     def normal_sort(self):
+        # http://localhost:8000/ 이 앞에 붙는다 !
         self.client.get("test/normal_sort/")
 
     # @task
