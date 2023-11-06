@@ -11,22 +11,24 @@
   <div id="app">
     <!-- 1. computed -->
     <ul>
-      <li>
+      <li v-for="number in evenNumbers">
+        {{ number }}
       </li>
     </ul>
 
     <hr>
 
     <!-- 2. method (computed가 불가능한 중첩된 v-for) -->
-    <ul>
-      <li>
+    <ul v-for="numbers in numberSets">
+      <li v-for="num in evenNumberSets(numbers)">
+        {{ num }}
       </li>
     </ul>
   </div>
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script>
-    const { createApp, ref } = Vue
+    const { createApp, ref, computed } = Vue
 
     const app = createApp({
       setup() {
@@ -36,8 +38,18 @@
           [6, 7, 8, 9, 10],
         ])
 
+        const evenNumbers = computed(() => {
+          return numbers.value.filter((number) => number % 2 === 0)
+        })
+
+        const evenNumberSets = function (numbers) {
+          return numbers.filter((number) => number % 2 === 0)
+        } 
+
         return {
           numberSets,
+          evenNumbers,
+          evenNumberSets
         }
       }
     })

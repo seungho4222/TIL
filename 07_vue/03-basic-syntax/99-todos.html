@@ -9,14 +9,15 @@
 
 <body>
   <div id="app">
-    <form>
-      <input>
+    <form @submit.prevent="addTodo">
+      <input v-model="newTodo">
       <button>Add Todo</button>
     </form>
 
     <ul>
-      <li>
-        <button>X</button>
+      <li v-for="todo in todos" :key="todo.id">
+        {{ todo.text }}
+        <button @click="removeTodo(todo)">X</button>
       </li>
     </ul>
   </div>
@@ -36,9 +37,19 @@
           { id: id++, text: 'Learn Vue' }
         ])
 
+        const addTodo = function () {
+          todos.value.push({ id: id++, text: newTodo.value})
+          newTodo.value = null
+        }
+
+        const removeTodo = function (todo) {
+          todos.value = todos.value.filter((t) => t !== todo)
+        }
         return {
           newTodo,
           todos,
+          addTodo,
+          removeTodo
         }
       }
     })

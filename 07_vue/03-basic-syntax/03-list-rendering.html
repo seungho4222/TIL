@@ -9,23 +9,26 @@
 
 <body>
   <div id="app">
-    <div>
+    <div v-for="(item, index) in myArr">
+      {{ index }} / {{ item.name }}
     </div>
-    <div>
+    <div v-for="(value, key, index) in myObj">
+      {{ index }} / {{ key }} / {{ value }}
     </div>
 
     <!-- v-for on <template> -->
     <ul>
-      <template>
-        <li></li>
-        <li></li>
+      <template v-for="item in myArr">
+        <li>{{ item.name }}</li>
+        <li>{{ item.age }}</li>
         <hr>
       </template>
     </ul>
 
     <!-- nested v-for -->
-    <ul>
-      <li>
+    <ul v-for="item in myInfo">
+      <li v-for="friend in item.friends">
+        {{ item.name }} - {{ friend }}
       </li>
     </ul>
 
