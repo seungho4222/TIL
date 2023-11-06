@@ -77,5 +77,16 @@ watch(variable, (newValue, oldValue) => {
 |사용 예시|연산 된 길이, 필터링 된 목록 계산 등|비동기 API 요청, 연관 데이터 업데이트 등|
 > computed와 watch 모두 의존(감시)하는 원본 데이터를 직접 변경하지 않음
 
-- [ ] : false
-- [x] : true
+## Lifecycle Hooks
+- Vue 인스턴스의 생애주기 동안 특정 시점에 실행되는 함수
+- 개발자가 특정 단계에서 의도하는 로직이 실행될 수 있도록 함
+```md
+# 특징
+- Vue는 Lifecycle Hooks에 등록된 콜백 함수들을 인스턴스와 자동으로 연결
+- 이렇게 동작하려면 hooks 함수들은 반드시 동기적으로 작성되어야 함
+- onMounted, onUpdated, onUnmounted etc.
+```
+
+## Vue Style Guide
+- 우선순위에 따라 4가지 범주로 나눔
+- https://vuejs.org/style-guide/
